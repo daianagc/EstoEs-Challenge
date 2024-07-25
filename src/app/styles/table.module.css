@@ -2,23 +2,50 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95%;
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(62, 58, 58, 0.15);
-    margin: 0 auto;
+
 }
 
-.table {
-    padding: 3rem 6rem;
+.head {
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
-.project {
-    width: 140%;
+.names {
+    font-size: 1.2rem;
+    font-weight: 550;
+}
+
+
+.row {
+    border-bottom: 0.1rem solid var(--border-primary);
+
 }
 
 .enabled {
-    font-size: 0.9rem;
-    width: 6rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 550;
+    width: 7rem;
+    border-radius: 2px;
+
+
+}
+
+.avatar {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+}
+
+.icon {
+    padding: 1rem 3rem;
+
 }

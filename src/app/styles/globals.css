@@ -26,6 +26,7 @@ html {
 main {
   width: 100%;
   min-height: 100vh;
+  padding: 28px;
   background-color: var(--background-primary);
   align-items: center;
 
