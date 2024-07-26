@@ -41,6 +41,20 @@ export function addProject(project) {
   }
 }
 
+export function getProjectByQuery(query) {
+  if (typeof window !== "undefined") {
+    let projects = JSON.parse(localStorage.getItem("projects"));
+
+    if (!projects) projects = PROJECTS;
+
+    if (!query) return projects;
+
+    return projects.filter((project) =>
+      project.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+}
+
 export function deleteProject(id) {
   if (typeof window !== "undefined") {
     let projects = JSON.parse(localStorage.getItem("projects"));

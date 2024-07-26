@@ -1,11 +1,15 @@
-import styles from "../styles/subheader.module.css";
+import styles from "../styles/button.module.css";
 import AddIcon from "@mui/icons-material/Add";
-
-export const CustomButton = ({ text, onClick }) => {
+export const CustomButton = ({ text, onClick, color = "primary", type }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
-      <AddIcon className={styles.addIcon} />
-      <span className={styles.buttonText}>{text}</span>
+    <button
+      className={
+        styles.button + " " + (color === "primary" ? "" : styles.secondary)
+      }
+      onClick={onClick}
+    >
+      {type === "Add" && <AddIcon />}
+      {text}
     </button>
   );
 };

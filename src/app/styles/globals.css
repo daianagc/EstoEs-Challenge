@@ -5,25 +5,25 @@
   margin: 0;
   padding: 0;
   text-decoration: unset;
-
 }
 
 :root {
-  --background-primary: #F0F2F5;
-  --background-secondary: #FFFFFF;
-  --button-primary: #F5222D;
-  --border-primary: #D9D9D9;
+  --background-primary: #f0f2f5;
+  --background-secondary: #ffffff;
+  --button-primary: #f5222d;
+  --button-secondary: #d9d9d9;
+  --border-primary: #d9d9d9;
+}
+
+body {
+  background-color: var(--background-primary);
 }
 
 html {
   font-size: 62.5%;
 }
 
-main {
-  width: 100%;
-  min-height: 100vh;
-  padding: 28px;
-  background-color: var(--background-primary);
-  align-items: center;
-
+main,
+section {
+  padding: 2.8rem;
 }

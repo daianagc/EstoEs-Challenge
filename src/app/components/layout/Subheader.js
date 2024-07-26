@@ -24,13 +24,15 @@ export const SubHeader = () => {
 
   return (
     <div className={styles.subheader}>
-      {pathname !== "/" && (
-        <div className={styles.back} onClick={goBack}>
-          <ArrowBackIcon />
-          <p className={styles.p}>Back</p>
-        </div>
-      )}
-      <h1 className={styles.h1}>{checkTitle()}</h1>
+      <div className={styles.column}>
+        {pathname !== "/" && (
+          <div className={styles.back} onClick={goBack}>
+            <ArrowBackIcon />
+            <p className={styles.p}>Back</p>
+          </div>
+        )}
+        <h1 className={styles.h1}>{checkTitle()}</h1>
+      </div>
       {pathname === "/" && (
         <CustomButton
           type="Add"

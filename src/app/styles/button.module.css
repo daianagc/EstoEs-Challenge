@@ -1,0 +1,19 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 10%;
+    height: 3.5rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background-color: var(--button-primary);
+    padding: 10px 25px;
+    color: var(--background-secondary);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.secondary {
+    background-color: var(--button-secondary);
+}

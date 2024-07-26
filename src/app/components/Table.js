@@ -15,28 +15,54 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import Popover from "@mui/material/Popover";
 import styles from "../styles/table.module.css";
-import { getProjects } from "../utils/projects";
+import {
+  deleteProject,
+  getProjectByQuery,
+  getProjects,
+} from "../utils/projects";
 import Link from "next/link";
+import { CustomModal } from "./Modal";
+import { useSearchParams } from "next/navigation";
 
 const CustomTable = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [rows, setRows] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState(null);
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const [openModal, setOpenModal] = useState(false);
+  const openPopover = Boolean(anchorEl);
+  const id = openPopover ? "simple-popover" : undefined;
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setRows(getProjects());
   }, []);
+
+  useEffect(() => {
+    const query = searchParams.get("query");
+    setRows(getProjectByQuery(query));
+  }, [searchParams]);
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
     setSelectedRowId(id);
   };
 
-  const handleClose = () => {
+  const handleClosePopover = () => {
     setAnchorEl(null);
     setSelectedRowId(null);
+  };
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+    setAnchorEl(null);
+  };
+
+  const handleCloseModal = () => setOpenModal(false);
+
+  const deleteRow = () => {
+    deleteProject(selectedRowId);
+    setRows(getProjects());
+    setOpenModal(false);
   };
 
   return (
@@ -89,7 +115,10 @@ const CustomTable = () => {
                       " " +
                       row.project_manager?.lastname
                     }
-                    src={`https://ui-avatars.com/api/?name=${row.project_manager?.name}+${row.project_manager?.lastname}`}
+                    src={
+                      row.project_manager.image ??
+                      `https://ui-avatars.com/api/?name=${row.project_manager?.name}+${row.project_manager?.lastname}`
+                    }
                   />
                   <p>
                     {row.project_manager?.name} {row.project_manager?.lastname}
@@ -101,11 +130,12 @@ const CustomTable = () => {
                   <Avatar
                     className={styles.avatarImg}
                     alt={
-                      row.project_manager?.name +
-                      " " +
-                      row.project_manager?.lastname
+                      row.assigned_to?.name + " " + row.assigned_to?.lastname
                     }
-                    src={`https://ui-avatars.com/api/?name=${row.assigned_to?.name}+${row.assigned_to?.lastname}`}
+                    src={
+                      row.assigned_to.image ??
+                      `https://ui-avatars.com/api/?name=${row.assigned_to?.name}+${row.assigned_to?.lastname}`
+                    }
                   />
                   <p>
                     {row.assigned_to?.name} {row.assigned_to?.lastname}
@@ -116,7 +146,7 @@ const CustomTable = () => {
                 <Chip
                   className={styles.enabled}
                   label={row.status.name}
-                  variant={row.status.id === 1 ? "" : "outline"}
+                  variant={row.status.id === 1 ? "" : "outlined"}
                 />
               </TableCell>
               <TableCell align="left" className={styles.icon}>
@@ -126,25 +156,23 @@ const CustomTable = () => {
                 />
                 <Popover
                   id={id}
-                  open={open && selectedRowId === row.id}
+                  open={openPopover && selectedRowId === row.id}
                   anchorEl={anchorEl}
-                  onClose={handleClose}
+                  onClose={handleClosePopover}
                   anchorOrigin={{
                     vertical: "bottom",
-                    horizontal: "right",
+                    horizontal: "left",
                   }}
                 >
-                  {" "}
-                  <div>
-                    <Link className={styles.edit} href={`/edit/${row.id}`}>
-                      <EditCalendarIcon className={styles.iconEdit} />
+                  <div className={styles.popover}>
+                    <Link href={`/edit/${row.id}`} className={styles.list}>
+                      <EditCalendarIcon />
                       <p>Edit</p>
                     </Link>
-
-                    <Link className={styles.delete} href={`/${row.id}`}>
-                      <DeleteOutlineIcon className={styles.iconDelete} />
+                    <div onClick={handleOpenModal} className={styles.list}>
+                      <DeleteOutlineIcon />
                       <p>Delete</p>
-                    </Link>
+                    </div>
                   </div>
                 </Popover>
               </TableCell>
@@ -152,6 +180,13 @@ const CustomTable = () => {
           ))}
         </TableBody>
       </Table>
+      <CustomModal
+        text={"Are you sure to delete this project?"}
+        open={openModal}
+        close={handleCloseModal}
+        onCancel={handleCloseModal}
+        onAction={deleteRow}
+      />
     </TableContainer>
   );
 };

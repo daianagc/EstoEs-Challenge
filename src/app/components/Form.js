@@ -22,9 +22,9 @@ export const CustomForm = ({ isEdit = false }) => {
     created_at: "",
     name: "",
     description: "",
-    project_manager: 0,
-    assigned_to: 0,
-    status: 0,
+    project_manager: "",
+    assigned_to: "",
+    status: "",
   });
   const [errors, setErrors] = useState({
     name: false,
@@ -41,7 +41,6 @@ export const CustomForm = ({ isEdit = false }) => {
       const project = getProject(id);
 
       setProject(project);
-      console.log("EDICION", project);
     }
   }, [isEdit, pathname]);
 
@@ -54,10 +53,10 @@ export const CustomForm = ({ isEdit = false }) => {
     console.log(project);
 
     const newErrors = {
-      name: project.name === "",
-      project_manager: project.project_manager == "",
-      assigned_to: project.assigned_to == "",
-      status: project.status == "",
+      name: !project.name,
+      project_manager: !project.project_manager,
+      assigned_to: !project.assigned_to,
+      status: !project.status,
     };
 
     setErrors(newErrors);
@@ -92,7 +91,7 @@ export const CustomForm = ({ isEdit = false }) => {
               value={project.name}
               onChange={handleChange}
               variant="outlined"
-              /*className={styles.input}*/
+              displayEmpty
             />
           </FormControl>
           <FormControl>
@@ -102,7 +101,6 @@ export const CustomForm = ({ isEdit = false }) => {
               value={project.description}
               onChange={handleChange}
               variant="outlined"
-              /*className={styles.input}*/
             />
           </FormControl>
           <FormControl>
@@ -113,14 +111,15 @@ export const CustomForm = ({ isEdit = false }) => {
               value={project.project_manager}
               onChange={handleChange}
               variant="outlined"
-              /*className={styles.input}*/
             >
+              <MenuItem disabled value="">
+                <em>Select a project manager</em>
+              </MenuItem>
               {PROJECT_MANAGERS.map((user) => (
                 <MenuItem key={user.id} value={user.id}>
                   {user.name} {user.lastname}
                 </MenuItem>
               ))}
-              <MenuItem value={0}>Select a project manager</MenuItem>
             </Select>
             {errors.project_manager && (
               <FormHelperText error={errors.project_manager}>
@@ -136,14 +135,16 @@ export const CustomForm = ({ isEdit = false }) => {
               value={project.assigned_to}
               onChange={handleChange}
               variant="outlined"
-              /*className={classes.input}*/
+              displayEmpty
             >
+              <MenuItem disabled value="">
+                <em>Select a user</em>
+              </MenuItem>
               {USERS.map((user) => (
                 <MenuItem key={user.id} value={user.id}>
                   {user.name} {user.lastname}
                 </MenuItem>
               ))}
-              <MenuItem value={0}>Select a user</MenuItem>
             </Select>
             {errors.assigned_to && (
               <FormHelperText error={errors.assigned_to}>
@@ -159,14 +160,16 @@ export const CustomForm = ({ isEdit = false }) => {
               value={project.status}
               onChange={handleChange}
               variant="outlined"
-              /*className={classes.input}*/
+              displayEmpty
             >
+              <MenuItem disabled value="">
+                <em>Select a status</em>
+              </MenuItem>
               {STATUSES.map((status) => (
                 <MenuItem key={status.id} value={status.id}>
                   {status.name}
                 </MenuItem>
               ))}
-              <MenuItem value={0}>Select a status</MenuItem>
             </Select>
             {errors.status && (
               <FormHelperText error={errors.status}>

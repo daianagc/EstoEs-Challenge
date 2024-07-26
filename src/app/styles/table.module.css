@@ -125,6 +125,29 @@
 
 }
 
+.popover {
+    background-color: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+    width: 12rem;
+}
+
+.list {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    font-size: 1.2rem;
+    justify-content: flex-start;
+    padding: 0.8rem 0.8rem 0.8rem 1rem;
+
+    &:nth-of-type(1) {
+        border-bottom: 0.1rem solid var(--border-primary);
+        color: var(--text-primary);
+        text-decoration: none;
+    }
+}
+
 @media (width < 899px) {
 
     .container {
