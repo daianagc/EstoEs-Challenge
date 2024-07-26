@@ -4,7 +4,6 @@ import {
   Select,
   TextField,
   MenuItem,
-  Card,
   FormControl,
   FormHelperText,
 } from "@mui/material";
@@ -80,108 +79,107 @@ export const CustomForm = ({ isEdit = false }) => {
 
   return (
     <div className={styles.card}>
-      <Card>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <FormControl>
-            <label>Project Name</label>
-            <TextField
-              error={errors.name}
-              helperText={errors.name ? "This field is required" : ""}
-              name="name"
-              value={project.name}
-              onChange={handleChange}
-              variant="outlined"
-              displayEmpty
-            />
-          </FormControl>
-          <FormControl>
-            <label>Description</label>
-            <TextField
-              name="description"
-              value={project.description}
-              onChange={handleChange}
-              variant="outlined"
-            />
-          </FormControl>
-          <FormControl>
-            <label>Project Manager</label>
-            <Select
-              error={errors.project_manager}
-              name="project_manager"
-              value={project.project_manager}
-              onChange={handleChange}
-              variant="outlined"
-            >
-              <MenuItem disabled value="">
-                <em>Select a project manager</em>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <FormControl>
+          <label>Project Name</label>
+          <TextField
+            error={errors.name}
+            helperText={errors.name ? "This field is required" : ""}
+            name="name"
+            value={project.name}
+            onChange={handleChange}
+            variant="outlined"
+            displayEmpty
+          />
+        </FormControl>
+        <FormControl>
+          <label>Description</label>
+          <TextField
+            name="description"
+            value={project.description}
+            onChange={handleChange}
+            variant="outlined"
+          />
+        </FormControl>
+        <FormControl>
+          <label>Project Manager</label>
+          <Select
+            error={errors.project_manager}
+            name="project_manager"
+            value={project.project_manager}
+            onChange={handleChange}
+            variant="outlined"
+            displayEmpty
+          >
+            <MenuItem disabled value="">
+              <em>Select a project manager</em>
+            </MenuItem>
+            {PROJECT_MANAGERS.map((user) => (
+              <MenuItem key={user.id} value={user.id}>
+                {user.name} {user.lastname}
               </MenuItem>
-              {PROJECT_MANAGERS.map((user) => (
-                <MenuItem key={user.id} value={user.id}>
-                  {user.name} {user.lastname}
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.project_manager && (
-              <FormHelperText error={errors.project_manager}>
-                This field is required
-              </FormHelperText>
-            )}
-          </FormControl>
-          <FormControl>
-            <label>Assigned to</label>
-            <Select
-              error={errors.assigned_to}
-              name="assigned_to"
-              value={project.assigned_to}
-              onChange={handleChange}
-              variant="outlined"
-              displayEmpty
-            >
-              <MenuItem disabled value="">
-                <em>Select a user</em>
+            ))}
+          </Select>
+          {errors.project_manager && (
+            <FormHelperText error={errors.project_manager}>
+              This field is required
+            </FormHelperText>
+          )}
+        </FormControl>
+        <FormControl>
+          <label>Assigned to</label>
+          <Select
+            error={errors.assigned_to}
+            name="assigned_to"
+            value={project.assigned_to}
+            onChange={handleChange}
+            variant="outlined"
+            displayEmpty
+          >
+            <MenuItem disabled value="">
+              <em>Select a user</em>
+            </MenuItem>
+            {USERS.map((user) => (
+              <MenuItem key={user.id} value={user.id}>
+                {user.name} {user.lastname}
               </MenuItem>
-              {USERS.map((user) => (
-                <MenuItem key={user.id} value={user.id}>
-                  {user.name} {user.lastname}
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.assigned_to && (
-              <FormHelperText error={errors.assigned_to}>
-                This field is required
-              </FormHelperText>
-            )}
-          </FormControl>
-          <FormControl className="styles.formCrontol">
-            <label>Status</label>
-            <Select
-              error={errors.status}
-              name="status"
-              value={project.status}
-              onChange={handleChange}
-              variant="outlined"
-              displayEmpty
-            >
-              <MenuItem disabled value="">
-                <em>Select a status</em>
+            ))}
+          </Select>
+          {errors.assigned_to && (
+            <FormHelperText error={errors.assigned_to}>
+              This field is required
+            </FormHelperText>
+          )}
+        </FormControl>
+        <FormControl className="styles.formCrontol">
+          <label>Status</label>
+          <Select
+            error={errors.status}
+            name="status"
+            value={project.status}
+            onChange={handleChange}
+            variant="outlined"
+            displayEmpty
+          >
+            <MenuItem disabled value="">
+              <em>Select a status</em>
+            </MenuItem>
+            {STATUSES.map((status) => (
+              <MenuItem key={status.id} value={status.id}>
+                {status.name}
               </MenuItem>
-              {STATUSES.map((status) => (
-                <MenuItem key={status.id} value={status.id}>
-                  {status.name}
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.status && (
-              <FormHelperText error={errors.status}>
-                This field is required
-              </FormHelperText>
-            )}
-          </FormControl>
-          <button type="submit" className={styles.submitButton}>
-            {isEdit ? "Save changes" : "Create project"}
-          </button>
-        </form>
-      </Card>
+            ))}
+          </Select>
+          {errors.status && (
+            <FormHelperText error={errors.status}>
+              This field is required
+            </FormHelperText>
+          )}
+        </FormControl>
+        <button type="submit" className={styles.submitButton}>
+          {isEdit ? "Save changes" : "Create project"}
+        </button>
+      </form>
     </div>
   );
 };
