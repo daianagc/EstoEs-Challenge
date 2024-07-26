@@ -2,6 +2,7 @@ import { Header } from "./components/layout/Header.js";
 import { SubHeader } from "./components/layout/Subheader.js";
 import "./styles/globals.css";
 import { roboto } from "./styles/fonts.js";
+import Head from "next/head.js";
 
 export const metadata = {
   title: "Esto Es challenge",
@@ -11,9 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
+      <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
+      </Head>
       <body className={`${roboto.className} antialiased`}>
         <Header />
         <SubHeader />
