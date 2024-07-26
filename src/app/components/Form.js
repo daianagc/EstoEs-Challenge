@@ -14,6 +14,7 @@ import { updateProject, addProject, getProject } from "../utils/projects";
 import { PROJECT_MANAGERS } from "../mock/projectManagers";
 import { USERS } from "../mock/users";
 import { STATUSES } from "../mock/statuses";
+import { CustomButton } from "./Button";
 
 export const CustomForm = ({ isEdit = false }) => {
   const [project, setProject] = useState({
@@ -83,6 +84,7 @@ export const CustomForm = ({ isEdit = false }) => {
         <FormControl>
           <label>Project Name</label>
           <TextField
+            className={styles.textField}
             error={errors.name}
             helperText={errors.name ? "This field is required" : ""}
             name="name"
@@ -95,6 +97,7 @@ export const CustomForm = ({ isEdit = false }) => {
         <FormControl>
           <label>Description</label>
           <TextField
+            className={styles.textField}
             name="description"
             value={project.description}
             onChange={handleChange}
@@ -104,6 +107,7 @@ export const CustomForm = ({ isEdit = false }) => {
         <FormControl>
           <label>Project Manager</label>
           <Select
+            className={styles.select}
             error={errors.project_manager}
             name="project_manager"
             value={project.project_manager}
@@ -129,6 +133,7 @@ export const CustomForm = ({ isEdit = false }) => {
         <FormControl>
           <label>Assigned to</label>
           <Select
+            className={styles.select}
             error={errors.assigned_to}
             name="assigned_to"
             value={project.assigned_to}
@@ -154,6 +159,7 @@ export const CustomForm = ({ isEdit = false }) => {
         <FormControl className="styles.formCrontol">
           <label>Status</label>
           <Select
+            className={styles.select}
             error={errors.status}
             name="status"
             value={project.status}
@@ -176,9 +182,7 @@ export const CustomForm = ({ isEdit = false }) => {
             </FormHelperText>
           )}
         </FormControl>
-        <button type="submit" className={styles.submitButton}>
-          {isEdit ? "Save changes" : "Create project"}
-        </button>
+        <CustomButton text={isEdit ? "Save changes" : "Create project"} />
       </form>
     </div>
   );

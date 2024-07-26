@@ -8,7 +8,6 @@
     padding: 20px;
     border-radius: 1px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .form {
@@ -18,8 +17,13 @@
     border: none;
 }
 
+.textField {
+    height: 3.5rem;
+}
+
 .select {
-    color: rgba(0, 0, 0, 0.45)
+    color: rgba(0, 0, 0, 0.45);
+    height: 4rem;
 }
 
 .submitButton {
@@ -32,5 +36,5 @@
     color: var(--background-secondary);
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 0.rem;
+    margin-bottom: 0rem;
 }

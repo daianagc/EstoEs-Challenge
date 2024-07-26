@@ -16,3 +16,10 @@
 .icon {
     font-size: 2rem;
 }
+
+@media only screen and (max-width: 700px) {
+    .control {
+        padding: 0 2.4rem;
+        width: 100%;
+    }
+}

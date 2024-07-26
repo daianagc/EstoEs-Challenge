@@ -4,7 +4,11 @@ export const CustomButton = ({ text, onClick, color = "primary", type }) => {
   return (
     <button
       className={
-        styles.button + " " + (color === "primary" ? "" : styles.secondary)
+        styles.button +
+        " " +
+        (color === "primary" ? "" : styles.secondary) +
+        " " +
+        (type === "Add" ? styles.add : "")
       }
       onClick={onClick}
     >
