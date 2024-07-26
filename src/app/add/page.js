@@ -1,5 +1,5 @@
-import { CustomButton } from "../components/Button";
+import { CustomForm } from "../components/Form";
 
 export default function Edit() {
-  return <CustomButton text="Create project" />;
+  return <CustomForm />;
 }

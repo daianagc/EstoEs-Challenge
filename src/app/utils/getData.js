@@ -1,9 +1,10 @@
-export async function getData(url) {
-  const res = await fetch(url);
+import { PROJECT_MANAGERS } from "../mock/projectManagers";
+import { USERS } from "../mock/users";
+import { STATUSES } from "../mock/statuses";
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+export const getProjectManager = (id) =>
+  PROJECT_MANAGERS.find((item) => item.id === id);
 
-  return res.json();
-}
+export const getUser = (id) => USERS.find((item) => item.id === id);
+
+export const getStatus = (id) => STATUSES.find((item) => item.id === id);

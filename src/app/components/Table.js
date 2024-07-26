@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,100 +11,56 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import Popover from "@mui/material/Popover";
 import styles from "../styles/table.module.css";
-
-const rows = [
-  {
-    id: 1,
-    name: "Landing page",
-    created_at: "2011-10-05T14:48:00.000Z",
-    project_manager: {
-      id: 1,
-      name: "Walt",
-      lastname: "Cosani",
-    },
-    assigned_to: {
-      id: 1,
-      name: "Ignacio",
-      lastname: "Truffa",
-    },
-    status: {
-      id: 1,
-      name: "Enabled",
-    },
-  },
-  {
-    id: 2,
-    name: "E-Commerce Shop",
-    created_at: "2011-10-05T14:48:00.000Z",
-    project_manager: {
-      id: 1,
-      name: "Walt",
-      lastname: "Cosani",
-    },
-    assigned_to: {
-      id: 1,
-      name: "Ignacio",
-      lastname: "Truffa",
-    },
-    status: {
-      id: 1,
-      name: "Enabled",
-    },
-  },
-  {
-    id: 3,
-    name: "CRM Linkroom",
-    created_at: "2011-10-05T14:48:00.000Z",
-    project_manager: {
-      id: 1,
-      name: "Walt",
-      lastname: "Cosani",
-    },
-    assigned_to: {
-      id: 1,
-      name: "Ignacio",
-      lastname: "Truffa",
-    },
-    status: {
-      id: 1,
-      name: "Enabled",
-    },
-  },
-];
+import { getProjects } from "../utils/projects";
+import Link from "next/link";
 
 const CustomTable = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [rows, setRows] = useState([]);
+  const [selectedRowId, setSelectedRowId] = useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const handleClick = (event) => {
+  useEffect(() => {
+    setRows(getProjects());
+  }, []);
+
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setSelectedRowId(id);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setSelectedRowId(null);
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer className={styles.container} component={Paper}>
+      <Table
+        className={styles.table}
+        sx={{ minWidth: 650 }}
+        aria-label="simple table"
+      >
         <TableHead>
           <TableRow>
-            <TableCell className={styles.head} align="left">
+            <TableCell align="left" className={styles.head}>
               Project info
             </TableCell>
-            <TableCell className={styles.head} align="left">
+            <TableCell align="left" className={styles.head}>
               Project Manager
             </TableCell>
-            <TableCell className={styles.head} align="left">
+            <TableCell align="left" className={styles.head}>
               Assigned to
             </TableCell>
-            <TableCell className={styles.head} align="left">
+            <TableCell align="left" className={styles.head}>
               Status
             </TableCell>
-            <TableCell className={styles.head} align="left">
+            <TableCell align="left" className={styles.head}>
               Action
             </TableCell>
           </TableRow>
@@ -122,7 +78,7 @@ const CustomTable = () => {
                   <p>Creation date: {row.created_at}</p>
                 </div>
               </TableCell>
-              <TableCell className={styles.cell} align="left">
+              <TableCell align="left" className={styles.cell}>
                 <div className={styles.avatar}>
                   <Avatar
                     alt={
@@ -130,7 +86,7 @@ const CustomTable = () => {
                       " " +
                       row.project_manager?.lastname
                     }
-                    src={`htttps://ui-avatars.com/api/?name=${row.project_manager?.name}+${row.project_manager?.lastname}`}
+                    src={`https://ui-avatars.com/api/?name=${row.project_manager?.name}+${row.project_manager?.lastname}`}
                   />
                   <p>
                     {row.project_manager?.name} {row.project_manager?.lastname}
@@ -141,9 +97,11 @@ const CustomTable = () => {
                 <div className={styles.cell}>
                   <Avatar
                     alt={
-                      row.assigned_to?.name + " " + row.assigned_to?.lastname
+                      row.project_manager?.name +
+                      " " +
+                      row.project_manager?.lastname
                     }
-                    src={`htttps://ui-avatars.com/api/?name=${row.assigned_to?.name}+${row.assigned_to?.lastname}`}
+                    src={`https://ui-avatars.com/api/?name=${row.assigned_to?.name}+${row.assigned_to?.lastname}`}
                   />
                   <p>
                     {row.assigned_to?.name} {row.assigned_to?.lastname}
@@ -157,11 +115,14 @@ const CustomTable = () => {
                   variant={row.status.id === 1 ? "" : "outline"}
                 />
               </TableCell>
-              <TableCell className={styles.icon} align="left">
-                <MoreVertIcon aria-describedby={row.id} onClick={handleClick} />
+              <TableCell align="left" className={styles.icon}>
+                <MoreVertIcon
+                  aria-describedby={id}
+                  onClick={(event) => handleClick(event, row.id)}
+                />
                 <Popover
-                  id={row.id}
-                  open={open}
+                  id={id}
+                  open={open && selectedRowId === row.id}
                   anchorEl={anchorEl}
                   onClose={handleClose}
                   anchorOrigin={{
@@ -169,7 +130,16 @@ const CustomTable = () => {
                     horizontal: "right",
                   }}
                 >
-                  <p>Edit</p>
+                  <Link href={`/edit/${row.id}`}>
+                    <EditCalendarIcon />
+                    <p>Edit</p>
+                  </Link>
+                  <div>
+                    <Link href={`/${row.id}`}>
+                      <DeleteOutlineIcon />
+                      <p>Delete</p>
+                    </Link>
+                  </div>
                 </Popover>
               </TableCell>
             </TableRow>
