@@ -80,103 +80,105 @@ export const CustomForm = ({ isEdit = false }) => {
   };
 
   return (
-    <Card className={styles.card}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <FormControl>
-          <label>Project Name</label>
-          <TextField
-            error={errors.name}
-            helperText={errors.name ? "This field is required" : ""}
-            name="name"
-            value={project.name}
-            onChange={handleChange}
-            variant="outlined"
-            /*className={styles.input}*/
-          />
-        </FormControl>
-        <FormControl>
-          <label>Description</label>
-          <TextField
-            name="description"
-            value={project.description}
-            onChange={handleChange}
-            variant="outlined"
-            /*className={styles.input}*/
-          />
-        </FormControl>
-        <FormControl>
-          <label>Project Manager</label>
-          <Select
-            error={errors.project_manager}
-            name="project_manager"
-            value={project.project_manager}
-            onChange={handleChange}
-            variant="outlined"
-            /*className={classes.input}*/
-          >
-            {PROJECT_MANAGERS.map((user) => (
-              <MenuItem key={user.id} value={user.id}>
-                {user.name} {user.lastname}
-              </MenuItem>
-            ))}
-            <MenuItem value={0}>Select a project manager</MenuItem>
-          </Select>
-          {errors.project_manager && (
-            <FormHelperText error={errors.project_manager}>
-              This field is required
-            </FormHelperText>
-          )}
-        </FormControl>
-        <FormControl>
-          <label>Assigned to</label>
-          <Select
-            error={errors.assigned_to}
-            name="assigned_to"
-            value={project.assigned_to}
-            onChange={handleChange}
-            variant="outlined"
-            /*className={classes.input}*/
-          >
-            {USERS.map((user) => (
-              <MenuItem key={user.id} value={user.id}>
-                {user.name} {user.lastname}
-              </MenuItem>
-            ))}
-            <MenuItem value={0}>Select a user</MenuItem>
-          </Select>
-          {errors.assigned_to && (
-            <FormHelperText error={errors.assigned_to}>
-              This field is required
-            </FormHelperText>
-          )}
-        </FormControl>
-        <FormControl>
-          <label>Status</label>
-          <Select
-            error={errors.status}
-            name="status"
-            value={project.status}
-            onChange={handleChange}
-            variant="outlined"
-            /*className={classes.input}*/
-          >
-            {STATUSES.map((status) => (
-              <MenuItem key={status.id} value={status.id}>
-                {status.name}
-              </MenuItem>
-            ))}
-            <MenuItem value={0}>Select a status</MenuItem>
-          </Select>
-          {errors.status && (
-            <FormHelperText error={errors.status}>
-              This field is required
-            </FormHelperText>
-          )}
-        </FormControl>
-        <button type="submit" className={styles.button}>
-          {isEdit ? "Save changes" : "Create project"}
-        </button>
-      </form>
-    </Card>
+    <div className={styles.card}>
+      <Card>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <FormControl>
+            <label>Project Name</label>
+            <TextField
+              error={errors.name}
+              helperText={errors.name ? "This field is required" : ""}
+              name="name"
+              value={project.name}
+              onChange={handleChange}
+              variant="outlined"
+              /*className={styles.input}*/
+            />
+          </FormControl>
+          <FormControl>
+            <label>Description</label>
+            <TextField
+              name="description"
+              value={project.description}
+              onChange={handleChange}
+              variant="outlined"
+              /*className={styles.input}*/
+            />
+          </FormControl>
+          <FormControl>
+            <label>Project Manager</label>
+            <Select
+              error={errors.project_manager}
+              name="project_manager"
+              value={project.project_manager}
+              onChange={handleChange}
+              variant="outlined"
+              /*className={styles.input}*/
+            >
+              {PROJECT_MANAGERS.map((user) => (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.name} {user.lastname}
+                </MenuItem>
+              ))}
+              <MenuItem value={0}>Select a project manager</MenuItem>
+            </Select>
+            {errors.project_manager && (
+              <FormHelperText error={errors.project_manager}>
+                This field is required
+              </FormHelperText>
+            )}
+          </FormControl>
+          <FormControl>
+            <label>Assigned to</label>
+            <Select
+              error={errors.assigned_to}
+              name="assigned_to"
+              value={project.assigned_to}
+              onChange={handleChange}
+              variant="outlined"
+              /*className={classes.input}*/
+            >
+              {USERS.map((user) => (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.name} {user.lastname}
+                </MenuItem>
+              ))}
+              <MenuItem value={0}>Select a user</MenuItem>
+            </Select>
+            {errors.assigned_to && (
+              <FormHelperText error={errors.assigned_to}>
+                This field is required
+              </FormHelperText>
+            )}
+          </FormControl>
+          <FormControl className="styles.formCrontol">
+            <label>Status</label>
+            <Select
+              error={errors.status}
+              name="status"
+              value={project.status}
+              onChange={handleChange}
+              variant="outlined"
+              /*className={classes.input}*/
+            >
+              {STATUSES.map((status) => (
+                <MenuItem key={status.id} value={status.id}>
+                  {status.name}
+                </MenuItem>
+              ))}
+              <MenuItem value={0}>Select a status</MenuItem>
+            </Select>
+            {errors.status && (
+              <FormHelperText error={errors.status}>
+                This field is required
+              </FormHelperText>
+            )}
+          </FormControl>
+          <button type="submit" className={styles.submitButton}>
+            {isEdit ? "Save changes" : "Create project"}
+          </button>
+        </form>
+      </Card>
+    </div>
   );
 };

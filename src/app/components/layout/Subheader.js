@@ -35,7 +35,7 @@ export const SubHeader = () => {
         <CustomButton
           type="Add"
           onClick={() => router.push("/add")}
-          text="+ Add Projects"
+          text="Add Project"
         />
       )}
     </div>

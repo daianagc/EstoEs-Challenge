@@ -1,14 +1,37 @@
 .card {
-    padding: 24rem;
+    padding: 24px;
+    top: 1rem;
+    left: 1rem;
     margin: 0 auto;
     max-width: 400px;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 1px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    border: none;
 }
+
+.select {
+    color: rgba(0, 0, 0, 0.45)
+}
+
+.submitButton {
+    width: 37%;
+    height: 3.5rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background-color: var(--button-primary);
+    padding: 10px 25px;
+    color: var(--background-secondary);
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 0.rem;
+}
+
+@media (width < 899px) {}

@@ -19,17 +19,30 @@
 
 .button {
     min-width: 10%;
-    height: 3.5rem;
-    font-size: 1.3rem;
-    font-weight: 500;
+    height: 4rem;
     position: absolute;
     right: 30px;
     background-color: var(--button-primary);
-    padding: 10px 25px;
+    padding: 7px 25px;
     color: var(--background-secondary);
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 0.rem;
+    margin-bottom: 0.1rem;
+}
+
+.buttonText {
+
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.addIcon {
+    top: 1.9px;
+    text-align: center;
+    position: relative;
+    right: 0.6rem;
+    font-size: 1.7rem;
 }
 
 .back {
@@ -43,4 +56,10 @@
 .p {
     font-size: 1.2rem;
     font-weight: 550;
+}
+
+@media (width < 899px) {
+    .button {
+        max-width: 16rem;
+    }
 }

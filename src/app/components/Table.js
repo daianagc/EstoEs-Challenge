@@ -73,14 +73,17 @@ const CustomTable = () => {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <div>
+                <div className={styles.contenedor}>
                   <p className={styles.names}>{row.name}</p>
-                  <p>Creation date: {row.created_at}</p>
+                  <p className={styles.created}>
+                    Creation date: {row.created_at}
+                  </p>
                 </div>
               </TableCell>
               <TableCell align="left" className={styles.cell}>
                 <div className={styles.avatar}>
                   <Avatar
+                    className={styles.avatarImg}
                     alt={
                       row.project_manager?.name +
                       " " +
@@ -94,8 +97,9 @@ const CustomTable = () => {
                 </div>
               </TableCell>
               <TableCell align="left">
-                <div className={styles.cell}>
+                <div className={styles.cellAssigned}>
                   <Avatar
+                    className={styles.avatarImg}
                     alt={
                       row.project_manager?.name +
                       " " +
@@ -130,13 +134,15 @@ const CustomTable = () => {
                     horizontal: "right",
                   }}
                 >
-                  <Link href={`/edit/${row.id}`}>
-                    <EditCalendarIcon />
-                    <p>Edit</p>
-                  </Link>
+                  {" "}
                   <div>
-                    <Link href={`/${row.id}`}>
-                      <DeleteOutlineIcon />
+                    <Link className={styles.edit} href={`/edit/${row.id}`}>
+                      <EditCalendarIcon className={styles.iconEdit} />
+                      <p>Edit</p>
+                    </Link>
+
+                    <Link className={styles.delete} href={`/${row.id}`}>
+                      <DeleteOutlineIcon className={styles.iconDelete} />
                       <p>Delete</p>
                     </Link>
                   </div>
