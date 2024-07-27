@@ -1,7 +1,7 @@
 
 ## Esto Es Challenge de Frontend
 
-Éste proyecto corresponde a un Challenge de Frontend, donde desarrolle una plataforma que tiene como objetivo realizar la gestión de de proyectos. En el cual un usuario puede crear uno nuevo, editarlo o eliminarlo, además de un buscador donde se puede filtrar y buscar rápidamente por el nombre.
+Éste proyecto corresponde a un Challenge de Frontend, donde desarrolle una plataforma que tiene como objetivo realizar la gestión de proyectos. En el cual un usuario puede crear uno nuevo, editarlo o eliminarlo, además de un buscador donde se puede filtrar y buscar rápidamente por el nombre.
 
 El sitio está desarrollado con React.JS y Next.JS , a partir de prototipos de referencia Desktop y Mobile.
 
