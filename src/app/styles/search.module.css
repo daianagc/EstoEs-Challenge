@@ -18,8 +18,12 @@
 }
 
 @media only screen and (max-width: 700px) {
+    .search {
+        padding: 0px 28px;
+        width: 100%;
+    }
+
     .control {
-        padding: 0 2.4rem;
         width: 100%;
     }
 }

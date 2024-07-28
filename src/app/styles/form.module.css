@@ -17,8 +17,8 @@
     border: none;
 }
 
-.textField {
-    height: 3.5rem;
+.textField div input {
+    height: 0.5rem;
 }
 
 .select {

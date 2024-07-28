@@ -3,6 +3,7 @@ import { SubHeader } from "./components/layout/Subheader.js";
 import "./styles/globals.css";
 import { roboto } from "./styles/fonts.js";
 import Head from "next/head.js";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Esto Es challenge",
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.className} antialiased`}>
         <Header />
         <SubHeader />
-        {children}
+        <Suspense>{children}</Suspense>
       </body>
     </html>
   );

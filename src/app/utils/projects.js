@@ -1,4 +1,5 @@
 import { PROJECTS } from "../mock/projects.js";
+import { formatDate } from "./formatDate.js";
 import { getProjectManager, getUser, getStatus } from "./getData.js";
 
 export function getProjects() {
@@ -30,8 +31,9 @@ export function getProject(id) {
 export function addProject(project) {
   if (typeof window !== "undefined") {
     let projects = JSON.parse(localStorage.getItem("projects"));
+    const date = new Date();
 
-    project.created_at = new Date().toISOString();
+    project.created_at = formatDate(date);
     project.project_manager = getProjectManager(project.project_manager);
     project.assigned_to = getUser(project.assigned_to);
     project.status = getStatus(project.status);
@@ -68,7 +70,6 @@ export function updateProject(project) {
     let projects = JSON.parse(localStorage.getItem("projects"));
     let updatedProjects = projects.map((p) => {
       if (p.id === project.id) {
-        project.created_at = new Date().toLocaleDateString();
         project.project_manager = getProjectManager(project.project_manager);
         project.assigned_to = getUser(project.assigned_to);
         project.status = getStatus(project.status);
