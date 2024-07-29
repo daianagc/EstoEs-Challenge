@@ -91,7 +91,6 @@ export const CustomForm = ({ isEdit = false }) => {
             value={project.name}
             onChange={handleChange}
             variant="outlined"
-            displayEmpty
           />
         </FormControl>
         <FormControl>

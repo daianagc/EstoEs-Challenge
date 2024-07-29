@@ -8,6 +8,7 @@ export const PROJECTS = [
       name: "Walt",
       lastname: "Cosani",
     },
+    description: "",
     assigned_to: {
       id: 1,
       name: "Ignacio",
@@ -21,6 +22,7 @@ export const PROJECTS = [
   },
   {
     id: 2,
+    description: "",
     name: "E-Commerce Shop",
     created_at: "09/09/2020 10:30 am",
     project_manager: {
@@ -41,6 +43,7 @@ export const PROJECTS = [
   },
   {
     id: 3,
+    description: "",
     name: "CRM Linkroom",
     created_at: "09/09/2020 10:30 am",
     project_manager: {
