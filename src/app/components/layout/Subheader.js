@@ -14,9 +14,9 @@ export const SubHeader = () => {
   };
 
   const checkTitle = () => {
-    if (pathname === "/edit") {
+    if (pathname.includes("edit")) {
       title = "Edit project";
-    } else if (pathname === "/add") {
+    } else if (pathname.includes("add")) {
       title = "Add project";
     }
     return title;
